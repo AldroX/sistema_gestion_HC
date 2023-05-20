@@ -1,0 +1,53 @@
+{% load widget_tweaks %}
+
+<div class="modal-dialog modal-lg"  role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+          <h2 class="modal-title">Crear Paciente</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" >
+              
+          </button>
+      </div>
+      <form  method="POST" action="{% url 'crearpaciente' %}" >
+
+        {% csrf_token %}
+      
+          {% if form.errors %}
+             <div>
+                 <p>Errooooo Guapo</p>
+                 <ul>
+                   {% for field in form %}
+                      {% for error in field.errors %}
+                      
+                        <li>{{ error }}</li>
+                      
+                      {% endfor %}
+                   
+                   {% endfor %}
+                 </ul>
+             </div>
+          {% endif %}
+          <div class="modal-body">
+            {{form.as_p}}
+          </div>
+
+           <div class="modal-footer">
+             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+             <button class="btn btn-outline-primary" type="submit">Confirmar</button>
+           </div>
+       </form>
+  </div>
+</div>
+
+<script>
+
+  {% if form.errors %}
+    var errors = '';
+     {% for field in form %}
+      {% for error in field.errors %}
+         errors += '{{error}}\n';
+      {% endfor %}   
+     {% endfor %}
+     
+  {% endif %} 
+</script>

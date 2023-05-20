@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block  content%}
+
+<section class="d-flex align-items-center justify-content-center ">
+    <div class="d-flex flex-column align-items-center p-5 pt-3 mt-5 gap-3 rounded form-bg-container border border-danger-subtle ">
+        {% if action == "add"%}
+        <p class="fs-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+          </svg>
+
+        {% else %}
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-dash-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+          </svg>
+        {% endif %}
+         {{title}} </p>
+
+         <form  method="POST"  >
+          {% csrf_token %}
+        
+          <div class="alert alert-warning" role="alert">
+             Esta seguro de eliminar el registro  {{ object }}?
+           </div>
+       
+          
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-danger">
+             Si,Aceptar
+             
+           </button>
+           <a href="{% url 'listarPaciente' %}" class="btn btn-outline-warning">
+            Cancelar
+            </a>
+          </div>
+         </form>
+     </div>
+
+     
+   
+ </section>
+
+
+ {% endblock  %}
